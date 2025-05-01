@@ -23,6 +23,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'service/users/faculty_service.dart';
+import 'service/users/student_service.dart';
 
 void main() async {
   print("Step 1");
@@ -63,6 +65,11 @@ class _MyAppState extends State<MyApp> {
     if (_email != null) {
       email= _email ;
       role = determineEmailType(email);
+      if(role=='faculty'){
+          FacultyService().getFacultyDetails(context);
+        }else{
+          StudentService().getStudentDetails(context, extractIdFromEmail(email));
+        }
     }
     return (accessToken != null && _email != null);
   }

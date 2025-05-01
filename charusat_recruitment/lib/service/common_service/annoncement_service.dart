@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:charusat_recruitment/const.dart';
 import 'package:charusat_recruitment/screens/models/announcement_model.dart';
 import 'package:charusat_recruitment/service/common_service/auth_service.dart';
+import 'package:charusat_recruitment/service/users/faculty_service.dart';
+import 'package:charusat_recruitment/service/users/student_service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -40,6 +42,8 @@ class AnnouncementService {
       if (response.statusCode == 200 || response.statusCode == 201) {
       List<dynamic> responseData = json.decode(response.body);
         print("Announcements received successfully with role $role");
+
+        
 
         List<AnnouncementModel> announcements =
             responseData.map<AnnouncementModel>((item) {

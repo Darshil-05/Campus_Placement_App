@@ -326,7 +326,7 @@ class CompanyService {
             url,
             headers: headers,
           )
-          .timeout(const Duration(seconds: 10));
+          .timeout(const Duration(seconds: 25));
 
       if (response.statusCode == 200) {
         Map<String, dynamic> jsonData = json.decode(response.body);

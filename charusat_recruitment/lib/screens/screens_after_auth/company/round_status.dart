@@ -5,12 +5,14 @@ import 'package:charusat_recruitment/service/company_service/company_service.dar
 
 class RoundStatus extends StatefulWidget {
   final int companyId;
+  final String companyName;
   final List<CompanyRound> rounds;
 
   const RoundStatus({
     super.key,
     required this.companyId,
     required this.rounds,
+    required this.companyName,
   });
 
   @override
@@ -22,12 +24,14 @@ class _RoundStatusState extends State<RoundStatus> {
   List<CompanyRound> _rounds = [];
   bool _isLoading = true;
   late int _companyId;
+  late String _companyName = '';
 
   @override
   void initState() {
     print("inside a Round update management");
 
     super.initState();
+    _companyName = widget.companyName;
     _companyId = widget.companyId;
     _rounds = List.from(widget.rounds);
     _isLoading = false;
@@ -83,7 +87,7 @@ class _RoundStatusState extends State<RoundStatus> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
             builder: (context) => StudentListManager(
-                  companyId: _companyId,
+                  companyName: _companyName ,
                 )),
       );
     } else {

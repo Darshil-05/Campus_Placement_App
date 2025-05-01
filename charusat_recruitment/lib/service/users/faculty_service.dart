@@ -110,7 +110,7 @@ class FacultyService {
         var jsonData = json.decode(response.body);
         // jsonData =jsonData[0];
         print(jsonData.toString());
-
+        name=jsonData['first_name'] ?? "";
         // Creating FacultyProfile Object
         return FacultyProfile(
           id: jsonData['id'] ?? 0,

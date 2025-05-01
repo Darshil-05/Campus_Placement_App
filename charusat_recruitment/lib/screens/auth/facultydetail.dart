@@ -1,6 +1,7 @@
 import 'package:charusat_recruitment/service/users/faculty_service.dart';
 import 'package:charusat_recruitment/screens/models/institute_model.dart';
 import 'package:flutter/material.dart';
+import 'package:charusat_recruitment/const.dart';
 
 class FacultyDetailsPage extends StatefulWidget {
   const FacultyDetailsPage({super.key});
@@ -55,7 +56,8 @@ class _FacultyDetailsPageState extends State<FacultyDetailsPage> {
           "last_name": _lastNameController.text,
           "institute": _selectedInstitute!,
           "department": _selectedDepartment!,
-          "role": "faculty"
+          "role": "faculty",
+          "faculty_email_id" : email,
         };
 
         bool success = await facultyService.addFaculty(context, facultyData);

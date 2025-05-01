@@ -1,3 +1,4 @@
+import 'package:charusat_recruitment/const.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:charusat_recruitment/Providers/menu_provider.dart'; // Import the MenuProvider
@@ -32,21 +33,10 @@ class SideMenu extends StatelessWidget {
                       child: const Icon(Icons.person_outlined),
                     ),
                     const SizedBox(width: 10),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Darshil Patel', // Replace with dynamic name from the provider if needed
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 17),
-                        ),
-                        Text(
-                          'Flutter Developer', // Replace with dynamic domain from the provider if needed
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 15),
-                        ),
-                      ],
+                    Text(
+                      name, // Replace with dynamic name from the provider if needed
+                      style: const TextStyle(
+                          color: Colors.white, fontSize: 17),
                     ),
                   ],
                 ),

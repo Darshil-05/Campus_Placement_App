@@ -1,7 +1,8 @@
-const String serverurl = 'http://192.168.123.209:8000';
+const String serverurl = 'http://192.168.103.209:8000';
 late String role ;
 late String email;
-
+String name ='';
+String domain=' ';
 
 String determineEmailType(String email) {
 

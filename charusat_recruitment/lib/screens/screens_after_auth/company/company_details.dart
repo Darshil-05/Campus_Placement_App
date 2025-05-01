@@ -2,6 +2,7 @@ import 'package:charusat_recruitment/const.dart';
 import 'package:charusat_recruitment/screens/models/faculty_model.dart';
 import 'package:charusat_recruitment/screens/screens_after_auth/company/company_status.dart';
 import 'package:charusat_recruitment/screens/screens_after_auth/company/round_status.dart';
+import 'package:charusat_recruitment/screens/screens_after_auth/company/student_list.dart';
 import 'package:flutter/material.dart';
 import 'package:charusat_recruitment/service/company_service/company_service.dart';
 
@@ -139,7 +140,9 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
 
                           // Call the addStudent function
                           bool success = await CompanyService().registerstudent(
-                              context, widget.companyid, extractIdFromEmail(email));
+                              context,
+                              widget.companyid,
+                              extractIdFromEmail(email));
                           // Close the loading dialog
                           if (mounted) {
                             Navigator.of(context).pop();
@@ -651,22 +654,21 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
                                     child: InkWell(
                                       onTap: () {
                                         print("Role : $role");
-                                        if(role == 'faculty'){
-                                           Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => RoundStatus(
-                                              companyId: companyData!.companyid,
-                                              rounds:
-                                                  companyData!.interviewRounds,
+                                        if (role == 'faculty') {
+                                         Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => RoundStatus(
+                                                companyId:
+                                                    companyData!.companyid,
+                                                    companyName: companyData!.companyName,
+                                                rounds: companyData!
+                                                    .interviewRounds,
+                                              ),
                                             ),
-                                          ),
-                                        );
-                                        }
-                                        else{
-                                          //show list of student
-                                        }
-                                       
+                                          );
+                                         
+                                        } 
                                       },
                                       child: Container(
                                         decoration: const BoxDecoration(
@@ -675,9 +677,11 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
                                                 Radius.circular(10))),
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 12, vertical: 10),
-                                        child:  Text(
-                                          (role == 'faculty') ? "Edit Rounds" : "View List"
-                                          ,style: const TextStyle(
+                                        child: Text(
+                                          (role == 'faculty')
+                                              ? "Edit Rounds"
+                                              : "View List",
+                                          style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             color: Colors.white,
@@ -703,27 +707,32 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
                   ),
                 ),
               ),
-        floatingActionButton: (role != 'faculty') ? SizedBox(
-          height: 50, // Set height of the button
-          width: 100, // Set width of the button
-          child: FloatingActionButton(
-            onPressed: () {
-              showApplyPopup(context, companyData?.companyName ?? "Company");
-            },
-            backgroundColor: const Color(0xff0f1d2c),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                  10), // Optional: Rounded rectangle shape
-            ),
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-              child: Text(
-                "Apply",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-         ) : const SizedBox() );
+        floatingActionButton: (role != 'faculty')
+            ? SizedBox(
+                height: 50, // Set height of the button
+                width: 100, // Set width of the button
+                child: FloatingActionButton(
+                  onPressed: () {
+                    showApplyPopup(
+                        context, companyData?.companyName ?? "Company");
+                  },
+                  backgroundColor: const Color(0xff0f1d2c),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                        10), // Optional: Rounded rectangle shape
+                  ),
+                  child: const Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+                    child: Text(
+                      "Apply",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              )
+            : const SizedBox());
   }
 
   void showEditDialog(BuildContext context, String title, String value,
